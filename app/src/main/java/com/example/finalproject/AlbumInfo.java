@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 
 public class AlbumInfo {
+    String albumName;
 
     public String getAlbumName() {
         return albumName;
@@ -11,10 +12,14 @@ public class AlbumInfo {
         this.albumName = albumName;
     }
 
-    String albumName;
+
 
     public AlbumInfo(String n){
+        this();
 this.albumName = n;
+
+    }
+    public AlbumInfo(){
 
     }
 

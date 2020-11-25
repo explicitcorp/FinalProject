@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class AudioDB extends AppCompatActivity {
-    ArrayList<AlbumInfo> albumInfo = new ArrayList<>();
+    ArrayList<AlbumInfo> albumArray = new ArrayList<>();
     Button searchButton;
     myListAdapter myListAdapter= new myListAdapter();
     @Override
@@ -22,12 +22,13 @@ public class AudioDB extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_d_b);
        searchButton=findViewById(R.id.button) ;
-        ListView myList = findViewById(R.id.listViewLayout);
 
+        ListView myList = findViewById(R.id.listViewLayout);
         myList.setAdapter(myListAdapter);
+
+
         searchButton.setOnClickListener(click->{
-            AlbumInfo newAlbum = new AlbumInfo("cool");
-            albumInfo.add(newAlbum);
+albumArray.add(new AlbumInfo("cool"));
 
             myListAdapter.notifyDataSetChanged();
         });
@@ -40,13 +41,13 @@ public class AudioDB extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return albumInfo.size();
+            return albumArray.size();
         }
 
         @Override
         public AlbumInfo getItem(int position) {
 
-            return albumInfo.get(position);
+            return albumArray.get(position);
 
         }
 
@@ -58,9 +59,9 @@ public class AudioDB extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = getLayoutInflater();
 
-               View newView = inflater.inflate(R.layout.activity_audio_d_b, parent, false);
+               View newView = inflater.inflate(R.layout.listview ,parent, false);
                 TextView display = newView.findViewById(R.id.textView2);
-              display.setText(albumInfo.get(position).getAlbumName());
+              display.setText(albumArray.get(position).getAlbumName());
                 return newView;
             }
 

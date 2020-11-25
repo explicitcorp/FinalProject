@@ -7,10 +7,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="79dp"
-        android:layout_height="71dp"
-        tools:srcCompat="@tools:sample/avatars"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        tools:srcCompat="@drawable/album"
+        app:layout_constraintRight_toLeftOf="@id/textView2"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
