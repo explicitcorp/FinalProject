@@ -36,7 +36,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class AudioDB extends AppCompatActivity {
     ArrayList<AlbumInfo> albumArray = new ArrayList<>();
@@ -117,17 +120,10 @@ URL url1 = new URL("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s="
 
 Log.i("#",url1.toString());
 
-                HttpURLConnection urlConnection = (HttpURLConnection) url1.openConnection();
-
-                urlConnection.getInputStream();
-                InputStream response;
-
-
-                //open the connection
-                urlConnection = (HttpURLConnection) url1.openConnection();
+                URLConnection urlConnection =  url1.openConnection();
 
                 //wait for data:
-                response = urlConnection.getInputStream();
+                InputStream response = urlConnection.getInputStream();
 
                 // json is UTF-8 by default
                 BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
@@ -138,8 +134,8 @@ Log.i("#",url1.toString());
                     sb.append(line + "\n");
                 }
                 String result = sb.toString();
-                Log.i("longStuff", result);
-                JSONObject resp = new JSONObject(result);//convet string to jsonobject
+                Log.i("l#ongStuff", result);
+                JSONObject resp = new JSONObject((result));//convet string to jsonobject
 
                 JSONArray jArray = resp.getJSONArray("album");
 
@@ -154,9 +150,6 @@ Log.i("#",url1.toString());
                     } catch (JSONException e) {
                         // handle the exception
                     }
-
-
-
 
             }
             catch (Exception e)
@@ -176,8 +169,9 @@ Log.i("#",url1.toString());
         //Type3
         public void onPostExecute(String fromDoInBackground)
         {
-           albumArray.add(new AlbumInfo(albumString));
-
+  //         albumArray.add(new AlbumInfo(albumString));
+//albumSet=findViewById(R.id.textView2);
+//albumSet.setText(albumString);
 
         }
     }
