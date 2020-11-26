@@ -15,8 +15,7 @@ public class AlbumInfo {
 
 
     public AlbumInfo(String n){
-        this();
-this.albumName = n;
+setAlbumName(n);
 
     }
     public AlbumInfo(){
