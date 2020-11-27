@@ -37,6 +37,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -108,7 +109,7 @@ public class AudioDB extends AppCompatActivity {
         TextView albumSet;
         TextView artistSet;
         TextView yearSet;
-        String albumString, artistString, yearString;
+        String albumString, artistString, yearStringau;
         HttpURLConnection connection;
         ProgressBar progressB ;
 
@@ -116,11 +117,11 @@ public class AudioDB extends AppCompatActivity {
         {
             try {
 
-URL url1 = new URL("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s="+args[0]);
+URL url1 = new URL("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s="+ URLEncoder.encode(args[0], "UTF-8"));
 
 Log.i("#",url1.toString());
 
-                URLConnection urlConnection =  url1.openConnection();
+                HttpURLConnection urlConnection = (HttpURLConnection) url1.openConnection();
 
                 //wait for data:
                 InputStream response = urlConnection.getInputStream();
@@ -147,14 +148,16 @@ Log.i("#",url1.toString());
                         Log.i("Test#", albumString);
                        artistString = anObject.getString("strArtist");
                        yearString =   anObject.getString("intYearReleased");
+                       //add to array list. IN of message, create an Album class
                     } catch (JSONException e) {
                         // handle the exception
+                        Log.e("Crash!!", e.getMessage());
                     }
 
             }
             catch (Exception e)
             {
-
+                Log.e("Crash!!", e.getMessage());
             }
 
             return "Done";
