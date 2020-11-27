@@ -119,7 +119,7 @@ displayAlbumArt.setImageBitmap(albumArray.get(position).getAlbumArt());
         TextView artistSet;
         TextView yearSet;
         Bitmap mIcon11;
-        String albumString, artistString, yearString, id, albumArt;
+        String albumString, artistString, yearString, id, albumArt,noneMessage="Sorry, this artist is not found.";
         HttpURLConnection connection;
         ProgressBar progressB;
 
@@ -148,6 +148,10 @@ displayAlbumArt.setImageBitmap(albumArray.get(position).getAlbumArt());
 
                 JSONArray jArray = resp.getJSONArray("album");
 publishProgress(40);
+if (resp.getString("album")==null){
+    TextView errorView = findViewById(R.id.error);
+    errorView.setText(noneMessage);
+}
                 for (int i = 0; i < jArray.length(); i++)
                     try {
                         JSONObject anObject = jArray.getJSONObject(i);
