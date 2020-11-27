@@ -45,32 +45,34 @@ import javax.net.ssl.HttpsURLConnection;
 public class AudioDB extends AppCompatActivity {
     ArrayList<AlbumInfo> albumArray = new ArrayList<>();
     Button searchButton;
-    myListAdapter myListAdapter= new myListAdapter();
-    AlbumQuery albumSearch=null;
-    EditText searchText=null;
-    String enteredText=null;
-    AlbumInfo infoM;
-    String jsonAlbum;
+    myListAdapter myListAdapter = new myListAdapter();
+    AlbumQuery albumSearch = null;
+    EditText searchText = null;
+    String enteredText = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_d_b);
-       searchButton=findViewById(R.id.button) ;
+        searchButton = findViewById(R.id.button);
 
         ListView myList = findViewById(R.id.listViewLayout);
         myList.setAdapter(myListAdapter);
 
 
-        searchButton.setOnClickListener(click->{
-
-            searchText=findViewById(R.id.searchBar);
+        searchButton.setOnClickListener(click -> {
+           albumArray.clear();
+            myListAdapter.notifyDataSetChanged();
+            searchText = findViewById(R.id.searchBar);
             enteredText = searchText.getText().toString();
             albumSearch = new AlbumQuery();
             albumSearch.execute(enteredText);
+            searchText.getText().clear();
+
         });
 
 
-        }
+    }
 
 
     public class myListAdapter extends BaseAdapter {
@@ -92,34 +94,41 @@ public class AudioDB extends AppCompatActivity {
         public long getItemId(int position) {
             return (long) position;
         }
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = getLayoutInflater();
 
-               View newView = inflater.inflate(R.layout.listview ,parent, false);
-                TextView display = newView.findViewById(R.id.textView2);
-              display.setText(albumArray.get(position).getAlbumName());
-                return newView;
-            }
-
+            View newView = inflater.inflate(R.layout.listview, parent, false);
+            TextView displayArtist = newView.findViewById(R.id.textArtist);
+            TextView displayAlbum = newView.findViewById(R.id.textAlbum);
+            TextView displayYear = newView.findViewById(R.id.textYear);
+            ImageView displayAlbumArt = newView.findViewById(R.id.imageView);
+            displayArtist.setText(albumArray.get(position).getArtistName());
+            displayAlbum.setText(albumArray.get(position).getAlbumName());
+            displayYear.setText(albumArray.get(position).getYear());
+displayAlbumArt.setImageBitmap(albumArray.get(position).getAlbumArt());
+            return newView;
         }
 
+    }
 
-    private class AlbumQuery extends AsyncTask< String, Integer, String> {
+
+    private class AlbumQuery extends AsyncTask<String, Integer, String> {
         TextView albumSet;
         TextView artistSet;
         TextView yearSet;
-        String albumString, artistString, yearStringau;
+        Bitmap mIcon11;
+        String albumString, artistString, yearString, id, albumArt;
         HttpURLConnection connection;
-        ProgressBar progressB ;
+        ProgressBar progressB;
 
-        public String doInBackground(String ... args)
-        {
+        public String doInBackground(String... args) {
             try {
 
-URL url1 = new URL("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s="+ URLEncoder.encode(args[0], "UTF-8"));
+                URL url1 = new URL("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=" + URLEncoder.encode(args[0], "UTF-8"));
 
-Log.i("#",url1.toString());
+                Log.i("#", url1.toString());
 
                 HttpURLConnection urlConnection = (HttpURLConnection) url1.openConnection();
 
@@ -130,8 +139,7 @@ Log.i("#",url1.toString());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
                 StringBuilder sb = new StringBuilder();
                 String line = null;
-                while ((line = reader.readLine()) != null)
-                {
+                while ((line = reader.readLine()) != null) {
                     sb.append(line + "\n");
                 }
                 String result = sb.toString();
@@ -139,42 +147,57 @@ Log.i("#",url1.toString());
                 JSONObject resp = new JSONObject((result));//convet string to jsonobject
 
                 JSONArray jArray = resp.getJSONArray("album");
-
-                for (int i=0; i < jArray.length(); i++)
+publishProgress(40);
+                for (int i = 0; i < jArray.length(); i++)
                     try {
                         JSONObject anObject = jArray.getJSONObject(i);
                         // Pulling items from the array
+
+
                         albumString = anObject.getString("strAlbum");
+                        id = anObject.getString("idAlbum");
                         Log.i("Test#", albumString);
-                       artistString = anObject.getString("strArtist");
-                       yearString =   anObject.getString("intYearReleased");
-                       //add to array list. IN of message, create an Album class
+                        artistString = anObject.getString("strArtist");
+                        yearString = anObject.getString("intYearReleased");
+                        albumArt = anObject.getString("strAlbumThumb");
+                        publishProgress(i+40);
+                        String urldisplay = albumArt;
+                        mIcon11= null;
+                        try {
+                            InputStream in = new java.net.URL(urldisplay).openStream();
+                            mIcon11 = BitmapFactory.decodeStream(in);
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage());
+                            e.printStackTrace();
+                        }
+                        albumArray.add(new AlbumInfo(id, artistString, albumString, yearString, mIcon11));
+                        Log.i("##", albumArray.get(i).getAlbumName());
+                        //add to array list. IN of message, create an Album class
                     } catch (JSONException e) {
                         // handle the exception
                         Log.e("Crash!!", e.getMessage());
                     }
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 Log.e("Crash!!", e.getMessage());
             }
-
+            publishProgress(100);
             return "Done";
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
-        public void onProgressUpdate(Integer ... args)
-        {
+        public void onProgressUpdate(Integer... args) {
+            progressB = findViewById(R.id.progressBar);
             progressB.setVisibility(View.VISIBLE);
             progressB.setProgress(args[0]);
         }
+
         //Type3
-        public void onPostExecute(String fromDoInBackground)
-        {
-  //         albumArray.add(new AlbumInfo(albumString));
-//albumSet=findViewById(R.id.textView2);
-//albumSet.setText(albumString);
+        public void onPostExecute(String fromDoInBackground) {
+
+            myListAdapter.notifyDataSetChanged();
+            progressB.setVisibility(View.INVISIBLE);
+
 
         }
     }
