@@ -49,6 +49,8 @@ public class AudioDB extends AppCompatActivity {
     AlbumQuery albumSearch = null;
     EditText searchText = null;
     String enteredText = null;
+    Boolean testNull;
+    TextView errorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +60,10 @@ public class AudioDB extends AppCompatActivity {
 
         ListView myList = findViewById(R.id.listViewLayout);
         myList.setAdapter(myListAdapter);
-
+        errorView = findViewById(R.id.error);
 
         searchButton.setOnClickListener(click -> {
+            errorView.setText(null);
            albumArray.clear();
             myListAdapter.notifyDataSetChanged();
             searchText = findViewById(R.id.searchBar);
@@ -119,6 +122,7 @@ displayAlbumArt.setImageBitmap(albumArray.get(position).getAlbumArt());
         TextView artistSet;
         TextView yearSet;
         Bitmap mIcon11;
+
         String albumString, artistString, yearString, id, albumArt,noneMessage="Sorry, this artist is not found.";
         HttpURLConnection connection;
         ProgressBar progressB;
@@ -145,13 +149,14 @@ displayAlbumArt.setImageBitmap(albumArray.get(position).getAlbumArt());
                 String result = sb.toString();
                 Log.i("l#ongStuff", result);
                 JSONObject resp = new JSONObject((result));//convet string to jsonobject
-
+                JSONObject nully = new JSONObject((result));//convet string to jsonobject
+                 testNull = nully.isNull("album");
+                Log.i("#", String.valueOf(testNull));
                 JSONArray jArray = resp.getJSONArray("album");
 publishProgress(40);
-if (resp.getString("album")==null){
-    TextView errorView = findViewById(R.id.error);
-    errorView.setText(noneMessage);
-}
+
+
+
                 for (int i = 0; i < jArray.length(); i++)
                     try {
                         JSONObject anObject = jArray.getJSONObject(i);
@@ -198,7 +203,9 @@ if (resp.getString("album")==null){
 
         //Type3
         public void onPostExecute(String fromDoInBackground) {
+if(testNull){
 
+            errorView.setText(noneMessage);}
             myListAdapter.notifyDataSetChanged();
             progressB.setVisibility(View.INVISIBLE);
 
