@@ -58,7 +58,6 @@ public class AudioDB extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_d_b);
         searchButton = findViewById(R.id.button);
-
         ListView myList = findViewById(R.id.listViewLayout);
         myList.setAdapter(myListAdapter);
         errorView = findViewById(R.id.error);
