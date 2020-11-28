@@ -65,6 +65,7 @@ public class AlbumDetails extends AppCompatActivity {
             trackInfo1.clear();
             myListAdapter1.notifyDataSetChanged();
             loadDataFromDatabase();
+            myListAdapter1.notifyDataSetChanged();
         });
 
     }
@@ -141,7 +142,6 @@ public class AlbumDetails extends AppCompatActivity {
             progressBar.setVisibility(View.INVISIBLE);
 saveButton.setOnClickListener(click->{
   for (int i=0;i<trackInfo1.size();i++){
-      newRowValues.put(MyOpener.COL_ALBUM_ID,trackInfo1.get(i).getId());
       newRowValues.put(MyOpener.COL_ALBUM,trackInfo1.get(i).getAlbumName());
       newRowValues.put(MyOpener.COL_ARTIST,trackInfo1.get(i).getArtistName());
       newRowValues.put(MyOpener.COL_SONG,trackInfo1.get(i).getSongName());
@@ -205,7 +205,7 @@ saveButton.setOnClickListener(click->{
 
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
 
-        String[] columns = {MyOpener.COL_ID,MyOpener.COL_ALBUM_ID, MyOpener.COL_ARTIST, MyOpener.COL_ALBUM, MyOpener.COL_SONG};
+        String[] columns = {MyOpener.COL_ID, MyOpener.COL_ARTIST, MyOpener.COL_ALBUM, MyOpener.COL_SONG};
 
         //query all the results from the database:
 
@@ -216,7 +216,6 @@ saveButton.setOnClickListener(click->{
 
         //find the column indices:
         int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
-        int albumColIndex = results.getColumnIndex(MyOpener.COL_ALBUM_ID);
         int artistColumnIndex = results.getColumnIndex(MyOpener.COL_ARTIST);
         int albumColumnIndex = results.getColumnIndex(MyOpener.COL_ALBUM);
         int songColIndex = results.getColumnIndex(MyOpener.COL_SONG);
@@ -224,7 +223,7 @@ saveButton.setOnClickListener(click->{
         //iterate over the results, return true if there is a next item:
 
         while (results.moveToNext()) {
-            String id = results.getString(idColIndex);
+            long index = results.getLong(idColIndex);
             String artist = results.getString(artistColumnIndex);
             String album = results.getString(albumColumnIndex);
             String song = results.getString(songColIndex);
@@ -232,7 +231,7 @@ saveButton.setOnClickListener(click->{
 
             //add the new Contact to the array list:
 
-            trackInfo1.add(new TrackInfo(id,artist, album, song));
+            trackInfo1.add(new TrackInfo(index,artist, album, song));
 
         }   myListAdapter1.notifyDataSetChanged();
 

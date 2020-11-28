@@ -6,6 +6,16 @@ import android.graphics.Bitmap;
 public class AlbumInfo {
     String id;
 
+    public long getIndex() {
+        return index;
+    }
+
+    public void setIndex(long index) {
+        this.index = index;
+    }
+
+    long index;
+
 
     public String getId() {
         return id;
