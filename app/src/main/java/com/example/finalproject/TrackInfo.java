@@ -2,16 +2,18 @@ package com.example.finalproject;
 
 
 public class TrackInfo {
-    String id;
 
 
-    public String getId() {
-        return id;
+    public long getIndex() {
+        return index;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIndex(long index) {
+        this.index = index;
     }
+
+    long index;
+
 
     public String getArtistName() {
         return artistName;
@@ -42,21 +44,23 @@ public class TrackInfo {
         this.albumName = albumName;
     }
 
-
-
-    public TrackInfo(String id, String artistName, String albumName, String songName ){
-        setId(id);
+    public TrackInfo(long index, String artistName, String albumName, String songName ){
+        setIndex(index);
         setArtistName(artistName);
         setAlbumName(albumName);
-      setSongName(songName);
+        setSongName(songName);
+
+    }
+
+    public TrackInfo(String id, String artistName, String albumName, String songName ){
+        this(0,artistName,albumName,songName);
+
 
     }
 
     public TrackInfo( String artistName, String albumName, String songName ){
 this ("",artistName,albumName,songName);
-        setArtistName(artistName);
-        setAlbumName(albumName);
-        setSongName(songName);
+
 
     }
 

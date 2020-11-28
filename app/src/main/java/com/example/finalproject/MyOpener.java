@@ -12,7 +12,6 @@ public class MyOpener extends SQLiteOpenHelper {
     public final static String COL_SONG = "SONG";
     public final static String COL_ARTIST = "ARTIST";
     public final static String COL_ALBUM = "ALBUM";
-    public final static String COL_ALBUM_ID = "ALBUMID";
     public final static String COL_ID = "_id";
 
     public MyOpener(Context ctx) {
@@ -25,7 +24,7 @@ public class MyOpener extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREATE TABLE "+TABLE_NAME +" (_id INTEGER PRIMARY KEY AUTOINCREMENT, "+COL_ALBUM_ID+"text, " +COL_ARTIST +" text," +COL_ALBUM  +" text,"+COL_SONG+" text);");  // add or remove columns
+        db.execSQL("CREATE TABLE "+TABLE_NAME +" (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +COL_ARTIST +" text," +COL_ALBUM  +" text,"+COL_SONG+" text);");  // add or remove columns
     }
 
     //this function gets called if the database version on your device is lower than VERSION_NUM
