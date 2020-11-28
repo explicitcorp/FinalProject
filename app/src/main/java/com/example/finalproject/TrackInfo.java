@@ -52,6 +52,12 @@ public class TrackInfo {
 
     }
 
+    public TrackInfo( String artistName, String albumName, String songName ){
+this ("",artistName,albumName,songName);
+        setArtistName(artistName);
+        setAlbumName(albumName);
+        setSongName(songName);
 
+    }
 
 }

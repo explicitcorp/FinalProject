@@ -10,23 +10,30 @@
         android:id="@+id/listViewLayout1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/button2"
+        app:layout_constraintBottom_toTopOf="@id/saveSongs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/albumNameDetails" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/saveSongs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save to Database"
         app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/loadSongs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load from Database"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="goToGoogle"
-        />
+        app:layout_constraintLeft_toRightOf="@id/saveSongs" />
 
     <TextView
         android:id="@+id/albumNameDetails"
