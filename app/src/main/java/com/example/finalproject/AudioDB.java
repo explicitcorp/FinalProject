@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -74,6 +75,14 @@ public class AudioDB extends AppCompatActivity {
 
         });
 
+        myList.setOnItemClickListener((parent, view, position, id)->{
+            Intent trackInfo = new Intent(this, TrackInfo.class);
+            trackInfo.putExtra("URL", "https://theaudiodb.com/api/v1/json/1/track.php?m="+albumArray.get(position).getId());
+startActivity(trackInfo);
+
+
+        });
+
 
     }
 
@@ -118,9 +127,6 @@ displayAlbumArt.setImageBitmap(albumArray.get(position).getAlbumArt());
 
 
     private class AlbumQuery extends AsyncTask<String, Integer, String> {
-        TextView albumSet;
-        TextView artistSet;
-        TextView yearSet;
         Bitmap mIcon11;
 
         String albumString, artistString, yearString, id, albumArt,noneMessage="Sorry, this artist is not found.";
