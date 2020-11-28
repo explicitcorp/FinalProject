@@ -76,7 +76,7 @@ public class AudioDB extends AppCompatActivity {
         });
 
         myList.setOnItemClickListener((parent, view, position, id)->{
-            Intent trackInfo = new Intent(this, TrackInfo.class);
+            Intent trackInfo = new Intent(this, AlbumDetails.class);
             trackInfo.putExtra("URL", "https://theaudiodb.com/api/v1/json/1/track.php?m="+albumArray.get(position).getId());
 startActivity(trackInfo);
 

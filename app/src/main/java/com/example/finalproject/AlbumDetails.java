@@ -3,6 +3,7 @@ package com.example.finalproject;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -13,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -29,23 +32,34 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class AlbumDetails extends AppCompatActivity {
-ArrayList<TrackInfo> trackInfo = new ArrayList<TrackInfo>();
+ArrayList<TrackInfo> trackInfo1 = new ArrayList<TrackInfo>();
 TrackQuery trackSearch = new TrackQuery();
-myListAdapter myListAdapter = new myListAdapter();
+myListAdapter myListAdapter1 = new myListAdapter();
+TextView titleCard;
+Button webButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_details);
+        ListView myListView = findViewById(R.id.listViewLayout1);
+        myListView.setAdapter(myListAdapter1);
 String passedURL = getIntent().getStringExtra("URL");
 trackSearch.execute(passedURL);
+titleCard=findViewById(R.id.albumNameDetails);
 
+    }
 
+    private void goToUrl (String url) {
+        Intent intent = new Intent(this, WebViewActivity.class);
+        intent.putExtra("url", url);
+        startActivity(intent);
     }
     private class TrackQuery extends AsyncTask<String, Integer, String> {
         String albumString, artistString, trackString, id;
         HttpURLConnection connection;
-        ProgressBar progressB;
+        ProgressBar progressBar;
 
         public String doInBackground(String... args) {
         try {
@@ -70,25 +84,21 @@ trackSearch.execute(passedURL);
             Log.i("l#ongStuff", result);
             JSONObject resp = new JSONObject((result));//convet string to jsonobject
             JSONArray jArray = resp.getJSONArray("track");
-            publishProgress(40);
-
-
-
+publishProgress(30);
             for (int i = 0; i < jArray.length(); i++)
                 try {
+                    publishProgress(30+i);
                     JSONObject anObject = jArray.getJSONObject(i);
                     id = anObject.getString("idAlbum");
                      trackString= anObject.getString("strTrack");
-                    Log.i("Test#", albumString);
                     albumString = anObject.getString("strAlbum");
                  artistString  = anObject.getString("strArtist");
-                    publishProgress(i+40);
-                    trackInfo.add(new TrackInfo(id, artistString, albumString, trackString ));
-                    Log.i("##", trackInfo.get(i).getAlbumName());
+Log.i("##", trackString);
+                    trackInfo1.add(new TrackInfo(id, artistString, albumString, trackString ));
                     //add to array list. IN of message, create an Album class
                 } catch (JSONException e) {
                     // handle the exception
-                    Log.e("Crash!!", e.getMessage());
+                    Log.e("Crash!!!", e.getMessage());
                 }
 
         } catch (Exception e) {
@@ -100,16 +110,16 @@ trackSearch.execute(passedURL);
 
         @RequiresApi(api = Build.VERSION_CODES.N)
         public void onProgressUpdate(Integer... args) {
-        progressB = findViewById(R.id.progressBar);
-        progressB.setVisibility(View.VISIBLE);
-        progressB.setProgress(args[0]);
+            progressBar = findViewById(R.id.prog);
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setProgress(args[0]);
     }
 
         //Type3
         public void onPostExecute(String fromDoInBackground) {
-
-        myListAdapter.notifyDataSetChanged();
-        progressB.setVisibility(View.INVISIBLE);
+titleCard.setText("Track list from album "+albumString);
+        myListAdapter1.notifyDataSetChanged();
+            progressBar.setVisibility(View.INVISIBLE);
 
 
     }
@@ -119,13 +129,13 @@ trackSearch.execute(passedURL);
 
         @Override
         public int getCount() {
-            return trackInfo.size();
+            return trackInfo1.size();
         }
 
         @Override
         public TrackInfo getItem(int position) {
 
-            return trackInfo.get(position);
+            return trackInfo1.get(position);
 
         }
 
@@ -139,12 +149,18 @@ trackSearch.execute(passedURL);
             LayoutInflater inflater = getLayoutInflater();
 
             View newView = inflater.inflate(R.layout.listview1, parent, false);
+            webButton = newView.findViewById(R.id.webButton1);
+            webButton.setText(trackInfo1.get(position).getSongName());
+            webButton.setOnClickListener(click->{
+                goToUrl("http://www.google.com/search?q="+trackInfo1.get(position).getArtistName()+" "+trackInfo1.get(position).getSongName());
+            });
             TextView displayArtist = newView.findViewById(R.id.textArtist);
             TextView displayAlbum = newView.findViewById(R.id.textAlbum);
             TextView displaySong = newView.findViewById(R.id.textSong);
-            displayArtist.setText(trackInfo.get(position).getArtistName());
-            displayAlbum.setText(trackInfo.get(position).getAlbumName());
-            displaySong.setText(trackInfo.get(position).getSongName());
+            displayArtist.setText(trackInfo1.get(position).getArtistName());
+            displayAlbum.setText(trackInfo1.get(position).getAlbumName());
+            displaySong.setText(trackInfo1.get(position).getSongName());
+
             return newView;
         }
 
