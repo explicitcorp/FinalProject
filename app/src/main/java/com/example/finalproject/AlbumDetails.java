@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,6 +52,7 @@ public class AlbumDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_details);
+        Toast.makeText(getApplicationContext(),"Displaying Album Info", Toast.LENGTH_SHORT).show();
         ListView myListView = findViewById(R.id.listViewLayout1);
         dbOpener = new MyOpener(this);
         db = dbOpener.getWritableDatabase();
