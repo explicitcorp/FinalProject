@@ -1,12 +1,15 @@
 package com.example.finalproject;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +24,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +49,8 @@ import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT;
+
 public class AudioDB extends AppCompatActivity {
     ArrayList<AlbumInfo> albumArray = new ArrayList<>();
     Button searchButton;
@@ -57,15 +65,28 @@ public class AudioDB extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_d_b);
+
+        View parentLayout = findViewById(android.R.id.content);
+        Snackbar.make(parentLayout, "Click for help", Snackbar.LENGTH_INDEFINITE)
+        .setAction("HELP", dview -> {
+            Builder alertDialog = new Builder(AudioDB.this);
+            alertDialog.setTitle("Search Help");
+            alertDialog.setMessage("To find the album details of the artist you're looking for please enter their name and click Search.");
+            alertDialog.setNegativeButton("OK", (click, arg) -> {
+            });
+            alertDialog.create();
+            alertDialog.show();
+        }).setActionTextColor(Color.RED).show();
         searchButton = findViewById(R.id.button);
+
         ListView myList = findViewById(R.id.listViewLayout);
         myList.setAdapter(myListAdapter);
         errorView = findViewById(R.id.error);
-
         searchButton.setOnClickListener(click -> {
             errorView.setText(null);
            albumArray.clear();
             myListAdapter.notifyDataSetChanged();
+
             searchText = findViewById(R.id.searchBar);
             enteredText = searchText.getText().toString();
             albumSearch = new AlbumQuery();
@@ -77,7 +98,8 @@ public class AudioDB extends AppCompatActivity {
         myList.setOnItemClickListener((parent, view, position, id)->{
             Intent trackInfo = new Intent(this, AlbumDetails.class);
             trackInfo.putExtra("URL", "https://theaudiodb.com/api/v1/json/1/track.php?m="+albumArray.get(position).getId());
-startActivity(trackInfo);
+            startActivity(trackInfo);
+
 
 
         });
