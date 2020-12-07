@@ -103,6 +103,18 @@ public class AudioDB extends AppCompatActivity {
 
 
         });
+        myList.setOnItemLongClickListener((parent, view, position, id)->{
+Bundle dataPass = new Bundle();
+dataPass.putString("Artist", albumArray.get(position).getArtistName());
+            dataPass.putString("Album", albumArray.get(position).getAlbumName());
+            DetailFragment dFragment = new DetailFragment(); //add a DetailFragment
+            dFragment.setArguments( dataPass ); //pass it a bundle for information
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fl, dFragment) //Add the fragment in FrameLayout
+                    .commit();
+return true;
+        });
 
 
     }
