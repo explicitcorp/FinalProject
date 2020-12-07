@@ -2,7 +2,7 @@
     <string name="app_name">Final Project</string>
     <string name="noneMessage" translatable="true">Sorry, this artist is not found.</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="loadDB">Load from Database</string>
-    <string name="saveDB">Save to Database</string>
-    <string name="search">Search</string>
+    <string name="loadDB">Charger depuis la base de données</string>
+    <string name="saveDB">Enregistrer dans la base de données</string>
+    <string name="search">Chercher</string>
 </resources>
