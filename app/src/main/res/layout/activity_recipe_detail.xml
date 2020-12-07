@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecipeDetail">
+    <TextView
+        android:id="@+id/titleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Title : "/>
+    <TextView
+        android:id="@+id/titlevalue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/titleLabel"/>
+    <TextView
+        android:id="@+id/hrefLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/titleLabel"
+        android:textStyle="bold"
+        android:text="Href : "/>
+    <TextView
+        android:id="@+id/hrefvalue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titlevalue"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/hrefLabel"/>
+    <TextView
+        android:id="@+id/ingredientLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hrefLabel"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:text="Ingredients : "/>
+    <TextView
+        android:id="@+id/ingredientvalue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hrefvalue"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/ingredientLabel"/>
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/ingredientLabel"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="SAVE To MY FAVORITE"/>
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Final_Group_Project</string>
+    <string name="recipe">Recipe</string>
+    <string name="item">Item:</string>
+    <string name="Ingredients">Ingredients:</string>
+    <string name="search">SEARCH</string>
+    <string name="back">BACK</string>
+    <string name="favorite">FAVORITE</string>
+</resources>
