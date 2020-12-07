@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">Final Project</string>
-    <string name="noneMessage" translatable="true">Sorry, this artist is not found.</string>
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="loadDB">Load from Database</string>
-    <string name="saveDB">Save to Database</string>
-    <string name="search">Search</string>
-    <string name="mainButton">Audio Database</string>
-    <string name="searchHeader">Search for Artist:</string>
+    <string name="covidWelcome">Welcome to Covid-19 Information Page</string>
+    <string name="covidSaved">Save Date</string>
+    <string name="covidDelete">Delete Date</string>
+    <string name="covidDate">YYYY-MM-DD</string>
+    <string name="covidCountryName">Type Country</string>
+    <string name="covidSearch">Search</string>
+    <string name="covidListInfo">Covid Saved Information</string>
+    <string name="covid">Covid-19</string>
+    <string name="recipe">Recipe Search</string>
+    <string name="ticket">TicketMaster Event</string>
+    <string name="audio">The Audio Database</string>
+    <string name="home">Home</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>
