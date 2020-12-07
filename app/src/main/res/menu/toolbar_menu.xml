@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/home"
+            android:title="@string/home"
+            android:orderInCategory="10"
+            android:visible="false"
+            app:showAsAction="always"/>
+        <item
+            android:id="@+id/ticket"
+            android:icon="@drawable/ticket"
+            android:title="@string/ticket"
+            android:orderInCategory="100"
+            android:visible="true"
+            app:showAsAction="always"/>
+        <item
+            android:id="@+id/recipe"
+            android:icon="@drawable/recipe"
+            android:title="@string/recipe"
+            android:orderInCategory="200"
+            android:visible="true"
+            app:showAsAction="always"/>
+        <item
+            android:id="@+id/covid"
+            android:icon="@drawable/covid"
+            android:title="@string/covid"
+            android:orderInCategory="300"
+            android:visible="true"
+            app:showAsAction="always"/>
+        <item
+            android:id="@+id/audio"
+            android:icon="@drawable/audio"
+            android:title="@string/audio"
+            android:orderInCategory="400"
+            android:visible="true"
+            app:showAsAction="always"/>
+
+</menu>
