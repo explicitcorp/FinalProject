@@ -5,4 +5,6 @@
     <string name="loadDB">Charger depuis la base de données</string>
     <string name="saveDB">Enregistrer dans la base de données</string>
     <string name="search">Chercher</string>
+    <string name="mainButton">Base de données audio</string>
+    <string name="searchHeader">Recherche d\'artiste:</string>
 </resources>
