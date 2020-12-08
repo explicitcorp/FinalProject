@@ -35,6 +35,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+/**
+ * Details activity to show all tracks from selected listview album
+ */
 public class AlbumDetails extends AppCompatActivity {
     ArrayList<TrackInfo> trackInfo1 = new ArrayList<TrackInfo>();
     TrackQuery trackSearch = new TrackQuery();
@@ -78,6 +81,9 @@ public class AlbumDetails extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * AsyncTask again to load info from web
+     */
     private class TrackQuery extends AsyncTask<String, Integer, String> {
         String albumString, artistString, trackString, id;
         HttpURLConnection connection;
@@ -197,32 +203,22 @@ saveButton.setOnClickListener(click->{
 
     }
 
+    /**
+     * Method to load data from database
+     */
 
     private void loadDataFromDatabase() {
 
-        //get a database connection:
-
- //This calls onCreate() if you've never built the table before, or onUpgrade if the version here is newer
-
-
-        // We want to get all of the columns. Look at MyOpener.java for the definitions:
-
         String[] columns = {MyOpener.COL_ID, MyOpener.COL_ARTIST, MyOpener.COL_ALBUM, MyOpener.COL_SONG};
 
-        //query all the results from the database:
 
         Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
 
-
-        //Now the results object has rows of results that match the query.
-
-        //find the column indices:
         int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
         int artistColumnIndex = results.getColumnIndex(MyOpener.COL_ARTIST);
         int albumColumnIndex = results.getColumnIndex(MyOpener.COL_ALBUM);
         int songColIndex = results.getColumnIndex(MyOpener.COL_SONG);
 
-        //iterate over the results, return true if there is a next item:
 
         while (results.moveToNext()) {
             long index = results.getLong(idColIndex);
@@ -231,13 +227,10 @@ saveButton.setOnClickListener(click->{
             String song = results.getString(songColIndex);
 
 
-            //add the new Contact to the array list:
-
             trackInfo1.add(new TrackInfo(index,artist, album, song));
 
         }   myListAdapter1.notifyDataSetChanged();
 
-        //At this point, the contactsList array has loaded every row from the cursor.
 
     }
 }
