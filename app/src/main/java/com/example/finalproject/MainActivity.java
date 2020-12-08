@@ -21,7 +21,13 @@ public class MainActivity extends AppCompatActivity {
         covidButton.setOnClickListener(clk->{
             startActivity(covidPage);
         });
+        /**
+         * Create listener to start audioDB activity
+         */
         audioButton.setOnClickListener(clk -> {
+            /**
+             * Start alert dialog to confirm activity launch
+             */
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle("Are you sure?");
             alertDialog.setMessage("Would you like to continue to AudioDB?");

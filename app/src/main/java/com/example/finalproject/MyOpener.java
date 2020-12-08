@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Opener to load from database
+ */
 public class MyOpener extends SQLiteOpenHelper {
 
     protected final static String DATABASE_NAME = "SongsDB";

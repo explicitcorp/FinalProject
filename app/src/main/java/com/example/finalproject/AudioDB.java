@@ -52,8 +52,14 @@ import javax.net.ssl.HttpsURLConnection;
 import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT;
 
 public class AudioDB extends AppCompatActivity {
+    /**
+     * Create Array to store information synced from audio DB website
+     */
     ArrayList<AlbumInfo> albumArray = new ArrayList<>();
     Button searchButton;
+    /**
+     * List Adapter instantiate
+     */
     myListAdapter myListAdapter = new myListAdapter();
     AlbumQuery albumSearch = null;
     EditText searchText = null;
@@ -67,6 +73,9 @@ public class AudioDB extends AppCompatActivity {
         setContentView(R.layout.activity_audio_d_b);
 
         View parentLayout = findViewById(android.R.id.content);
+        /**
+         * Snackbar to display help information
+         */
         Snackbar.make(parentLayout, "Click for help", Snackbar.LENGTH_INDEFINITE)
         .setAction("HELP", dview -> {
             Builder alertDialog = new Builder(AudioDB.this);
@@ -82,6 +91,9 @@ public class AudioDB extends AppCompatActivity {
         ListView myList = findViewById(R.id.listViewLayout);
         myList.setAdapter(myListAdapter);
         errorView = findViewById(R.id.error);
+        /**
+         * Listener for search button to initialize AsyncTask
+         */
         searchButton.setOnClickListener(click -> {
             errorView.setText(null);
            albumArray.clear();
@@ -94,7 +106,9 @@ public class AudioDB extends AppCompatActivity {
             searchText.getText().clear();
 
         });
-
+/**
+ * Listener on Listview to go to the details page
+ */
         myList.setOnItemClickListener((parent, view, position, id)->{
             Intent trackInfo = new Intent(this, AlbumDetails.class);
             trackInfo.putExtra("URL", "https://theaudiodb.com/api/v1/json/1/track.php?m="+albumArray.get(position).getId());
@@ -103,6 +117,10 @@ public class AudioDB extends AppCompatActivity {
 
 
         });
+
+        /**
+         * Attempted to load a fragment but it didn't work lol
+         */
         myList.setOnItemLongClickListener((parent, view, position, id)->{
 Bundle dataPass = new Bundle();
 dataPass.putString("Artist", albumArray.get(position).getArtistName());
@@ -119,7 +137,9 @@ return true;
 
     }
 
-
+    /**
+     * List Adapter to load listview information
+     */
     public class myListAdapter extends BaseAdapter {
 
 
@@ -158,6 +178,9 @@ displayAlbumArt.setImageBitmap(albumArray.get(position).getAlbumArt());
 
     }
 
+    /**
+     * AsyncTask to pull JSON info from website
+     */
 
     private class AlbumQuery extends AsyncTask<String, Integer, String> {
         Bitmap mIcon11;
