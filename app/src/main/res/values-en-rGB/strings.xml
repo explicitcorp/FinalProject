@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">UK Final Project</string>
     <string name="noneMessage">UK Sorry, this artist is not found.</string>
-    <string name="hello_blank_fragment" translatable="false">UK Hello blank fragment</string>
     <string name="loadDB">UK Load from Database</string>
     <string name="saveDB">UK Save to Database</string>
     <string name="search">UK Search</string>
@@ -23,4 +22,5 @@
     <string name="home">UK Home</string>
     <string name="open">UK Open</string>
     <string name="close">UK Close</string>
+    <string name="covidButton">UK Covid-19 Information</string>
 </resources>
