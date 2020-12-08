@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Button recipeButton = findViewById(R.id.recipeButton);
 
         recipeButton.setOnClickListener(clk->{
-
+startActivity(goToRecipeSearch);
         });
         covidButton.setOnClickListener(clk->{
             startActivity(covidPage);
