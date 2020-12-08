@@ -1,6 +1,5 @@
-package com.example.final_group_project;
+package com.example.finalproject;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -11,15 +10,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -108,18 +104,6 @@ public class RecipeSearchPage extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.backBtn){
-            Snackbar.make(root,"Do you wanna go back",Snackbar.LENGTH_LONG).setAction("Back", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            }).show();
-        }
-        return true;
-    }
 
     private class RecipeQuery extends AsyncTask<String ,Integer, String>{
 

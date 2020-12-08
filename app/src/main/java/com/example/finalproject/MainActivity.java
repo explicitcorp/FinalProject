@@ -13,11 +13,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /** Create the intents to choose which acitivy to start
+         *
+         */
+        Intent goToRecipeSearch = new Intent(MainActivity.this, RecipeSearchPage.class);
         Intent audioPage = new Intent(this, AudioDB.class);
         Intent covidPage = new Intent(this, Covid19Main.class);
         Button audioButton = findViewById(R.id.audioActivityButton);
         Button covidButton = findViewById(R.id.covidButton);
+        Button recipeButton = findViewById(R.id.recipeButton);
 
+        recipeButton.setOnClickListener(clk->{
+
+        });
         covidButton.setOnClickListener(clk->{
             startActivity(covidPage);
         });

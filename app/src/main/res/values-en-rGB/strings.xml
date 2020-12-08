@@ -23,4 +23,7 @@
     <string name="open">UK Open</string>
     <string name="close">UK Close</string>
     <string name="covidButton">UK Covid-19 Information</string>
+    <string name="recipeButton">UK Recipe Activity</string>
+    <string name="ingredients">UK Ingredients</string>
+    <string name="item">UK Item</string>
 </resources>

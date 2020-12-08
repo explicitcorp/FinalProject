@@ -24,4 +24,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="covidButton">Covid-19 Information</string>
+    <string name="recipeButton">Recipe Activity</string>
+    <string name="item">Item</string>
+    <string name="ingredients">Ingredients</string>
 </resources>

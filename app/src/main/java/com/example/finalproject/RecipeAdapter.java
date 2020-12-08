@@ -1,4 +1,4 @@
-package com.example.final_group_project;
+package com.example.finalproject;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -44,7 +44,7 @@
                android:layout_height="wrap_content"
                android:layout_marginRight="10dp"
                android:textStyle="bold"
-               android:text="@string/Ingredients"/>
+               android:text="@string/ingredients"/>
            <EditText
                android:id="@+id/ingredientSearchBox"
                android:layout_toRightOf="@+id/ingredientLable"
