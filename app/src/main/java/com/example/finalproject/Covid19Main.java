@@ -273,5 +273,7 @@ public class Covid19Main extends AppCompatActivity implements NavigationView.OnN
     @Override
     protected void onResume() {
         super.onResume();
+        getSavedInfo();
+        myAdapter.notifyDataSetChanged();
     }
 }
