@@ -14,8 +14,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent audioPage = new Intent(this, AudioDB.class);
+        Intent covidPage = new Intent(this, Covid19Main.class);
         Button audioButton = findViewById(R.id.audioActivityButton);
+        Button covidButton = findViewById(R.id.covidButton);
 
+        covidButton.setOnClickListener(clk->{
+            startActivity(covidPage);
+        });
         audioButton.setOnClickListener(clk -> {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle("Are you sure?");
