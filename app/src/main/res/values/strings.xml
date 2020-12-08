@@ -5,4 +5,6 @@
     <string name="loadDB">Load from Database</string>
     <string name="saveDB">Save to Database</string>
     <string name="search">Search</string>
+    <string name="mainButton">Audio Database</string>
+    <string name="searchHeader">Search for Artist:</string>
 </resources>
