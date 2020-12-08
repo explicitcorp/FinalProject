@@ -63,7 +63,7 @@ public class SqlHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         String[] columns = {COL_ID,COL_TITLE,COL_HREF,COL_INGREDIENTS,COL_THUMBNAIL};
         Cursor cursor = db.query(TABLE_NAME,columns,null,null,null,null,null);
-        Log.e("Cursor column count: ", cursor.getColumnCount()+"");
+        Log.e("Cursor column count : ", cursor.getColumnCount()+"");
         while(cursor.moveToNext()){
             int colIdIndex = cursor.getColumnIndex(COL_ID);
             int colTitleIndex = cursor.getColumnIndex(COL_TITLE);
