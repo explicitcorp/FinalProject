@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
+        <activity android:name=".FavRecipes"></activity>
+        <activity android:name=".RecipeDetail" />
+        <activity android:name=".RecipeSearchPage" />
         <activity android:name=".WebViewActivity"></activity>
         <activity android:name=".AlbumDetails" />
         <activity android:name=".AudioDB" />
