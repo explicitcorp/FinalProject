@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Final Project</string>
+    <string name="app_name">Covid-19 Cases</string>
     <string name="covidWelcome">COVID-19 by Country and Date</string>
     <string name="covidSaved">Save Date</string>
     <string name="covidDelete">Delete Date</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">UK Final Project</string>
+    <string name="app_name">UK Covid-19 Cases</string>
     <string name="covidWelcome">UK COVID-19 by Country and Date</string>
     <string name="covidSaved">UK Save Date</string>
     <string name="covidDelete">UK Delete Date</string>
